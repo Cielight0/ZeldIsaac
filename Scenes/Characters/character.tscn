@@ -223,7 +223,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"IdleDown",
-"speed": 5.0
+"speed": 100.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -231,7 +231,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"IdleLeft",
-"speed": 5.0
+"speed": 100.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -239,7 +239,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"IdleRight",
-"speed": 5.0
+"speed": 100.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -247,7 +247,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"IdleUp",
-"speed": 5.0
+"speed": 100.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -326,7 +326,7 @@ script = ExtResource("1_rwfvd")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_675jy")
-animation = &"IdleDown"
+animation = &"IdleUp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7k3u")

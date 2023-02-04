@@ -19,8 +19,7 @@ var dir_dict : Dictionary = {
 }
 
 signal state_changed
-signal facing_direction_changed
-
+signal direction_changed
 ### ACCESSORS###
 @export var state : int = STATE.IDLE:
 	set(value):
@@ -31,12 +30,14 @@ signal facing_direction_changed
 	get:
 		return state
 
+#var moving_direction := Vector2.ZERO
+
 @export var facing_direction := Vector2.DOWN:
 	set(value):
 		if value !=facing_direction:
 			facing_direction = value
 			print("facing direction changed")
-			emit_signal("facing_direction_changed")
+			emit_signal("direction_changed")
 	get:
 		return facing_direction
 func get_input():
@@ -68,10 +69,19 @@ func _physics_process(_delta):
 	var moving_direction = get_input()
 	if moving_direction != Vector2.ZERO:
 		facing_direction = moving_direction
-		state = STATE.MOVE
-		
-	if moving_direction == Vector2.ZERO and state != STATE.ATTACK:
-		state = STATE.IDLE
+			
+	#var dir_name = _find_dir_name(facing_direction)
+#	#Attack animations
+#	if state == STATE.ATTACK:
+#		animated_sprite.play("Attack"+dir_name)	
+#	#Idle animation
+#	else:
+#		state == STATE.IDLE
+#		if moving_direction == Vector2.ZERO:
+#			animated_sprite.stop()
+#		else:
+#			state = STATE.MOVE
+#			animated_sprite.play("Move"+dir_name)
 
 	if moving_direction.length() > 0:
 		velocity = velocity.lerp(moving_direction.normalized() * speed, acceleration)
