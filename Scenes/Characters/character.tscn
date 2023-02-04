@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ccxu5q6i2hr5e"]
+[gd_scene load_steps=41 format=3 uid="uid://ccxu5q6i2hr5e"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Character.gd" id="1_rwfvd"]
 [ext_resource type="Texture2D" uid="uid://nbknjjq27xnn" path="res://assets/Character_SpriteSheet.png" id="2_t4wer"]
@@ -66,6 +66,22 @@ region = Rect2(384, 64, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejgjr"]
 atlas = ExtResource("2_t4wer")
 region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks5jl"]
+atlas = ExtResource("2_t4wer")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02jjn"]
+atlas = ExtResource("2_t4wer")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut44d"]
+atlas = ExtResource("2_t4wer")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmfct"]
+atlas = ExtResource("2_t4wer")
+region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ui3w4"]
 atlas = ExtResource("2_t4wer")
@@ -203,6 +219,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ks5jl")
+}],
+"loop": true,
+"name": &"IdleDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02jjn")
+}],
+"loop": true,
+"name": &"IdleLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut44d")
+}],
+"loop": true,
+"name": &"IdleRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmfct")
+}],
+"loop": true,
+"name": &"IdleUp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ui3w4")
 }, {
 "duration": 1.0,
@@ -273,16 +321,17 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7k3u"]
 
 [node name="Character" type="CharacterBody2D"]
-position = Vector2(541, 316)
+position = Vector2(540, 317)
 script = ExtResource("1_rwfvd")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_675jy")
-animation = &"AttackDown"
+animation = &"IdleDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7k3u")
 one_way_collision_margin = 0.0
 debug_color = Color(0.866667, 0, 0.858824, 0.419608)
 
+[connection signal="state_changed" from="." to="." method="_on_state_changed"]
 [connection signal="animation_finished" from="AnimatedPlayer" to="." method="_on_animated_player_animation_finished"]
