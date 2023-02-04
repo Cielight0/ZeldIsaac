@@ -1,0 +1,34 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="ZeldIsaac"
+run/main_scene="res://Scenes/Levels/level.tscn"
+config/features=PackedStringArray("4.0", "Forward Plus")
+config/icon="res://icon.svg"
+
+[importer_defaults]
+
+2d_array_texture={
+"compress/bptc_ldr": 0,
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"mipmaps/generate": false,
+"mipmaps/limit": -1,
+"slices/horizontal": 8,
+"slices/vertical": 8
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
