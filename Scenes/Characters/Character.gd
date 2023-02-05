@@ -19,30 +19,36 @@ var dir_dict : Dictionary = {
 }
 
 signal state_changed
-signal direction_changed
+signal facing_direction_changed
+signal moving_direction_changed
+
 ### ACCESSORS###
 @export var state : int = STATE.IDLE:
 	set(value):
 		if value != state:
 			state = value
-			print("state changed")
 			emit_signal("state_changed")
 	get:
 		return state
-
-#var moving_direction := Vector2.ZERO
 
 @export var facing_direction := Vector2.DOWN:
 	set(value):
 		if value !=facing_direction:
 			facing_direction = value
-			print("facing direction changed")
-			emit_signal("direction_changed")
+			emit_signal("facing_direction_changed")
 	get:
 		return facing_direction
+
+@export var moving_direction := Vector2.DOWN:
+	set(value):
+		if value !=moving_direction:
+			moving_direction = value
+			print("moving direction changed")
+			emit_signal("moving_direction_changed")
+
+### INPUTS ###
 func get_input():
 	var input = Vector2()
-	#bool isAttacking = false
 	if Input.is_action_pressed('ui_right'):
 		input.x+= 1
 	if Input.is_action_pressed('ui_left'):
@@ -56,32 +62,21 @@ func get_input():
 	return input
 	
 func _find_dir_name(dir: Vector2) -> String:
-	var dir_values_array = dir_dict.values()
-	var dir_index = dir_values_array.find(dir)
-	if dir_index ==-1:
-		return ""
-	var dir_keys_array = dir_dict.keys()
-	var dir_keys = dir_keys_array[dir_index]
-	
-	return dir_keys
+	var direction = ""
+	for dir_name in dir_dict:
+		if dir_dict[dir_name] == dir:
+			direction = dir_name
+			break
+	return direction 
 
 func _physics_process(_delta):
-	var moving_direction = get_input()
+	moving_direction = get_input()
 	if moving_direction != Vector2.ZERO:
-		facing_direction = moving_direction
-			
-	#var dir_name = _find_dir_name(facing_direction)
-#	#Attack animations
-#	if state == STATE.ATTACK:
-#		animated_sprite.play("Attack"+dir_name)	
-#	#Idle animation
-#	else:
-#		state == STATE.IDLE
-#		if moving_direction == Vector2.ZERO:
-#			animated_sprite.stop()
-#		else:
-#			state = STATE.MOVE
-#			animated_sprite.play("Move"+dir_name)
+#		facing_direction = moving_direction
+		state = STATE.MOVE
+		
+	if moving_direction == Vector2.ZERO and state != STATE.ATTACK:
+		state = STATE.IDLE
 
 	if moving_direction.length() > 0:
 		velocity = velocity.lerp(moving_direction.normalized() * speed, acceleration)
@@ -92,15 +87,17 @@ func _physics_process(_delta):
 
 func update_animation():
 	var dir_name = _find_dir_name(facing_direction)
+	print(dir_name)
 	var state_name=""
 	
 	match(state):
 		STATE.IDLE: state_name = "Idle"
 		STATE.MOVE : state_name = "Move"
 		STATE.ATTACK : state_name = "Attack"
+	
 	animated_sprite.play(state_name+dir_name)
 		
-	print("Animation update !")
+#	print("Animation update !")
 
 func _on_animated_player_animation_finished():
 	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
@@ -109,5 +106,17 @@ func _on_animated_player_animation_finished():
 func _on_state_changed():
 	update_animation()
 
-func _on_direction_changed():
+func _on_facing_direction_changed():
 	update_animation()
+
+func _on_moving_direction_changed():
+	if moving_direction == Vector2.ZERO or moving_direction == facing_direction:
+		return
+	if moving_direction.x != 0 and moving_direction.y !=0:
+	
+		if moving_direction.x == facing_direction.x:
+			facing_direction = Vector2(0,moving_direction.y)
+		else: 
+			facing_direction = Vector2(moving_direction.x,0)
+	else:
+		facing_direction = moving_direction

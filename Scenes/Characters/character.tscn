@@ -326,12 +326,14 @@ script = ExtResource("1_rwfvd")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_675jy")
-animation = &"IdleUp"
+animation = &"IdleDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7k3u")
 one_way_collision_margin = 0.0
 debug_color = Color(0.866667, 0, 0.858824, 0.419608)
 
+[connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
+[connection signal="moving_direction_changed" from="." to="." method="_on_moving_direction_changed"]
 [connection signal="state_changed" from="." to="." method="_on_state_changed"]
 [connection signal="animation_finished" from="AnimatedPlayer" to="." method="_on_animated_player_animation_finished"]
