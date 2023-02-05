@@ -81,13 +81,22 @@ func _attack_effect()->void:
 		if body.has_method("destroy"):
 			body.destroy()
 
+func _interaction_attempt():
+	var bodies_array=attack_hitbox.get_overlapping_bodies()
+	print(bodies_array)
+	for body in bodies_array:
+		if body.has_method("interact") and body.state == body.STATE.CLOSED:
+			print(body.state)
+			body.interact()
+			return true
+	return false
+
 func _physics_process(_delta):
 	moving_direction = get_input()
 	if moving_direction.length() > 0:
 		velocity = velocity.lerp(moving_direction.normalized() * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
-		
 	move_and_slide()
 
 func update_animation():
@@ -105,6 +114,11 @@ func _on_animated_player_animation_finished():
 		state=STATE.IDLE
 
 func _on_state_changed():
+	if state == STATE.ATTACK:
+		if _interaction_attempt()==true:
+			state = STATE.IDLE
+		else:
+			state = STATE.ATTACK
 	update_animation()
 
 func _on_facing_direction_changed():
