@@ -4,8 +4,8 @@ extends CharacterBody2D
 @export var friction = 1
 @export var acceleration = 1
 
-@onready var animated_sprite = get_node("AnimatedPlayer")
-@onready var attack_hitbox = get_node("AttackHitbox")
+@onready var animated_sprite = $AnimatedPlayer
+@onready var attack_hitbox = $AttackHitbox
 
 enum STATE {
 	IDLE,
@@ -60,7 +60,6 @@ func get_input():
 		input.y-= 1
 	if Input.is_action_just_pressed('ui_accept'):
 		state = STATE.ATTACK
-		_attack_effect()
 	if moving_direction != Vector2.ZERO and state != STATE.ATTACK:
 		state = STATE.MOVE
 	if moving_direction == Vector2.ZERO and state != STATE.ATTACK:
@@ -99,7 +98,6 @@ func update_animation():
 		STATE.IDLE: state_name = "Idle"
 		STATE.MOVE : state_name = "Move"
 		STATE.ATTACK : state_name = "Attack"
-	
 	animated_sprite.play(state_name+dir_name)
 
 func _on_animated_player_animation_finished():
@@ -110,8 +108,10 @@ func _on_state_changed():
 	update_animation()
 
 func _on_facing_direction_changed():
-	update_animation()
 	_hitbox_direction()
+	if state != STATE.ATTACK:
+		update_animation()
+
 
 func _on_moving_direction_changed():
 	if moving_direction == Vector2.ZERO or moving_direction == facing_direction:
@@ -129,9 +129,6 @@ func _hitbox_direction():
 	var angle = facing_direction.angle()-1.57079637050629
 	attack_hitbox.set_rotation(angle)
 
-#func _on_animated_player_animation_changed():
-#	print("animation changed")
-#	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
-#		print("attack finished")
-#		if animated_sprite.get_frame()==1:
-#			_attack_effect()
+func _on_animated_player_animation_changed():
+	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
+		_attack_effect()
