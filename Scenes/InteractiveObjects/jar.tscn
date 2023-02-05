@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://b1uny8dsqwckh"]
+
+[ext_resource type="Script" path="res://Scenes/InteractiveObjects/jar.gd" id="1_g5ofe"]
+[ext_resource type="Texture2D" uid="uid://i30syciw2305" path="res://assets/Jar_SpriteSheet.png" id="1_yv1ui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc8k2"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l26nt"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t2sn"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5caio"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvf1l"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bju6h"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8j8p"]
+atlas = ExtResource("1_yv1ui")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hjma3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc8k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l26nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t2sn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5caio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvf1l")
+}],
+"loop": false,
+"name": &"Breaking",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bju6h")
+}],
+"loop": true,
+"name": &"Broken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8j8p")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xi5aw"]
+radius = 11.0
+
+[node name="Jar" type="StaticBody2D"]
+script = ExtResource("1_g5ofe")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hjma3")
+animation = &"Idle"
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_xi5aw")
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]
