@@ -15,6 +15,12 @@ run/main_scene="res://Scenes/Levels/level.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_height=640
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [importer_defaults]
 
 2d_array_texture={

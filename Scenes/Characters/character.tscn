@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ccxu5q6i2hr5e"]
+[gd_scene load_steps=42 format=3 uid="uid://ccxu5q6i2hr5e"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Character.gd" id="1_rwfvd"]
 [ext_resource type="Texture2D" uid="uid://nbknjjq27xnn" path="res://assets/Character_SpriteSheet.png" id="2_t4wer"]
@@ -320,20 +320,34 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7k3u"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idyhu"]
+size = Vector2(37, 15)
+
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(540, 317)
 script = ExtResource("1_rwfvd")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_675jy")
-animation = &"IdleDown"
+animation = &"AttackDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7k3u")
 one_way_collision_margin = 0.0
 debug_color = Color(0.866667, 0, 0.858824, 0.419608)
 
+[node name="AttackHitbox" type="Area2D" parent="."]
+position = Vector2(1, -1)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+position = Vector2(1, 26)
+shape = SubResource("RectangleShape2D_idyhu")
+debug_color = Color(0.407843, 0.462745, 1, 0.419608)
+metadata/_edit_lock_ = true
+
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="moving_direction_changed" from="." to="." method="_on_moving_direction_changed"]
 [connection signal="state_changed" from="." to="." method="_on_state_changed"]
+[connection signal="animation_changed" from="AnimatedPlayer" to="." method="_on_animated_player_animation_changed"]
 [connection signal="animation_finished" from="AnimatedPlayer" to="." method="_on_animated_player_animation_finished"]

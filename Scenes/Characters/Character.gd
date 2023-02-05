@@ -3,7 +3,9 @@ extends CharacterBody2D
 @export var speed = 250
 @export var friction = 1
 @export var acceleration = 1
+
 @onready var animated_sprite = get_node("AnimatedPlayer")
+@onready var attack_hitbox = get_node("AttackHitbox")
 
 enum STATE {
 	IDLE,
@@ -43,7 +45,6 @@ signal moving_direction_changed
 	set(value):
 		if value !=moving_direction:
 			moving_direction = value
-			print("moving direction changed")
 			emit_signal("moving_direction_changed")
 
 ### INPUTS ###
@@ -59,6 +60,11 @@ func get_input():
 		input.y-= 1
 	if Input.is_action_just_pressed('ui_accept'):
 		state = STATE.ATTACK
+		_attack_effect()
+	if moving_direction != Vector2.ZERO and state != STATE.ATTACK:
+		state = STATE.MOVE
+	if moving_direction == Vector2.ZERO and state != STATE.ATTACK:
+		state = STATE.IDLE
 	return input
 	
 func _find_dir_name(dir: Vector2) -> String:
@@ -69,15 +75,15 @@ func _find_dir_name(dir: Vector2) -> String:
 			break
 	return direction 
 
+func _attack_effect()->void:
+	var bodies_array=attack_hitbox.get_overlapping_bodies()
+	print(bodies_array)
+	for body in bodies_array:
+		if body.has_method("destroy"):
+			body.destroy()
+
 func _physics_process(_delta):
 	moving_direction = get_input()
-	if moving_direction != Vector2.ZERO:
-#		facing_direction = moving_direction
-		state = STATE.MOVE
-		
-	if moving_direction == Vector2.ZERO and state != STATE.ATTACK:
-		state = STATE.IDLE
-
 	if moving_direction.length() > 0:
 		velocity = velocity.lerp(moving_direction.normalized() * speed, acceleration)
 	else:
@@ -87,7 +93,6 @@ func _physics_process(_delta):
 
 func update_animation():
 	var dir_name = _find_dir_name(facing_direction)
-	print(dir_name)
 	var state_name=""
 	
 	match(state):
@@ -96,8 +101,6 @@ func update_animation():
 		STATE.ATTACK : state_name = "Attack"
 	
 	animated_sprite.play(state_name+dir_name)
-		
-#	print("Animation update !")
 
 func _on_animated_player_animation_finished():
 	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
@@ -108,6 +111,7 @@ func _on_state_changed():
 
 func _on_facing_direction_changed():
 	update_animation()
+	_hitbox_direction()
 
 func _on_moving_direction_changed():
 	if moving_direction == Vector2.ZERO or moving_direction == facing_direction:
@@ -120,3 +124,14 @@ func _on_moving_direction_changed():
 			facing_direction = Vector2(moving_direction.x,0)
 	else:
 		facing_direction = moving_direction
+
+func _hitbox_direction():
+	var angle = facing_direction.angle()-1.57079637050629
+	attack_hitbox.set_rotation(angle)
+
+#func _on_animated_player_animation_changed():
+#	print("animation changed")
+#	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
+#		print("attack finished")
+#		if animated_sprite.get_frame()==1:
+#			_attack_effect()
