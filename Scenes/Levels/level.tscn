@@ -191,7 +191,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_kdnkh"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_p4mkg")
+sources/1 = SubResource("TileSetAtlasSource_p4mkg")
 
 [node name="Level" type="Node2D"]
 position = Vector2(2, 3)
@@ -209,7 +209,7 @@ position = Vector2(541, 316)
 tile_set = SubResource("TileSet_kdnkh")
 cell_quadrant_size = 32
 format = 2
-layer_0/tile_data = PackedInt32Array(262145, 0, 0, 393207, 0, 0, 65545, 0, 0, 393211, 0, 1, 458747, 0, 2, 393216, 0, 1, 458752, 0, 2, -589825, 131072, 0, -524289, 131072, 1, -655360, 196608, 0, -589824, 196608, 1, -327691, 0, 0, -393208, 0, 0)
+layer_0/tile_data = PackedInt32Array(262145, 0, 0, 393207, 0, 0, 65545, 0, 0, 393211, 0, 1, 458747, 0, 2, 393216, 0, 1, 458752, 0, 2, -589825, 131072, 0, -524289, 131072, 1, -655360, 196608, 0, -589824, 196608, 1, -327691, 0, 0, -393208, 0, 0, 393220, 65537, 0)
 metadata/_edit_lock_ = true
 
 [node name="Jar" parent="." instance=ExtResource("3_ub5sl")]
