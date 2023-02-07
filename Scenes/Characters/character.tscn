@@ -346,6 +346,12 @@ shape = SubResource("RectangleShape2D_idyhu")
 debug_color = Color(0.407843, 0.462745, 1, 0.419608)
 metadata/_edit_lock_ = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="moving_direction_changed" from="." to="." method="_on_moving_direction_changed"]
 [connection signal="state_changed" from="." to="." method="_on_state_changed"]
