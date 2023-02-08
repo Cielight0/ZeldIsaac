@@ -93,7 +93,7 @@ func _interaction_attempt():
 
 func _physics_process(_delta):
 	moving_direction = get_input()
-	if moving_direction.length() > 0:
+	if moving_direction.length() > 0 and state != STATE.ATTACK:
 		velocity = velocity.lerp(moving_direction.normalized() * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)

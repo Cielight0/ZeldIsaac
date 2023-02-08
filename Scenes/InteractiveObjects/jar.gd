@@ -14,10 +14,12 @@ var state : int = STATE.IDLE
 func destroy()->void:
 	if state == STATE.IDLE:
 		state = STATE.BREAKING
+		collision_shape.set_disabled(true)
 		animated_sprite.play("Breaking")
 		
 
 func _on_animated_sprite_animation_finished():
 	if animated_sprite.get_animation() == "Breaking":
 		state = STATE.BROKEN
-		collision_shape.set_disabled(true)
+		#await get_tree().create_timer(30).timeout
+		#queue_free()

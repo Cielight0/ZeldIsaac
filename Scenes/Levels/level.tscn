@@ -99,7 +99,7 @@ texture_region_size = Vector2i(32, 32)
 0:2/0 = 0
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8.5, -13, 3, -16, -6.5, -12, -16, 12.5, -16, 16, -7.5, 13.5, 1.5, 9.5, 7.5, 7, 8.5, -5, 9.5)
 5:2/next_alternative_id = 2
 5:2/0 = 0
 5:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -264,7 +264,7 @@ layer_0/tile_data = PackedInt32Array(393211, 0, 1, 458747, 0, 2, 393216, 0, 2, -
 [node name="Jar2" parent="." instance=ExtResource("3_ub5sl")]
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(658, 219)
+position = Vector2(504, 254)
 
 [node name="Jar4" parent="." instance=ExtResource("3_ub5sl")]
 z_as_relative = false
@@ -284,7 +284,7 @@ position = Vector2(489, 383)
 [node name="Jar3" parent="." instance=ExtResource("3_ub5sl")]
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(691, 347)
+position = Vector2(659, 349)
 
 [node name="Character" parent="." instance=ExtResource("1_eigrf")]
 z_as_relative = false
@@ -298,19 +298,19 @@ position = Vector2(778, 329)
 position = Vector2(887, 450)
 
 [node name="Coin3" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(869, 362)
+position = Vector2(934, 391)
 
 [node name="Coin4" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(953, 294)
+position = Vector2(984, 323)
 
 [node name="Coin5" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(811, 398)
+position = Vector2(870, 318)
 
 [node name="Coin6" parent="." instance=ExtResource("5_nnppm")]
 position = Vector2(936, 231)
 
 [node name="Coin7" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(836, 270)
+position = Vector2(801, 224)
 
 [node name="Coin8" parent="." instance=ExtResource("5_nnppm")]
 position = Vector2(779, 250)
