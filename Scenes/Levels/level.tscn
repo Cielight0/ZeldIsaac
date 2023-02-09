@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://xh7cotliebuv"]
+[gd_scene load_steps=12 format=3 uid="uid://xh7cotliebuv"]
 
 [ext_resource type="PackedScene" uid="uid://ccxu5q6i2hr5e" path="res://Scenes/Characters/character.tscn" id="1_eigrf"]
 [ext_resource type="Texture2D" uid="uid://cwxyphq8na3to" path="res://assets/Tileset.png" id="2_liy7y"]
 [ext_resource type="PackedScene" uid="uid://b1uny8dsqwckh" path="res://Scenes/InteractiveObjects/jar.tscn" id="3_ub5sl"]
 [ext_resource type="PackedScene" uid="uid://cbe3ismqie25c" path="res://Scenes/InteractiveObjects/chest.tscn" id="4_8mf5w"]
 [ext_resource type="PackedScene" uid="uid://cc863vhdgryxk" path="res://Scenes/InteractiveObjects/Coin/coin.tscn" id="5_nnppm"]
+[ext_resource type="Texture2D" uid="uid://cmcipm8bodccv" path="res://Scenes/UI/HUD/HUD.png" id="6_7g0d4"]
+[ext_resource type="Texture2D" uid="uid://bqbihtc2qdr72" path="res://Scenes/UI/HUD/HUD_Mask.png" id="7_me3ln"]
+[ext_resource type="Texture2D" uid="uid://ddryhfgpp1en6" path="res://Scenes/UI/HUD/Portrait.png" id="7_rld1l"]
+[ext_resource type="FontFile" uid="uid://cn5fuf0okhhdn" path="res://Scenes/UI/Font/BabaMediumPixels.ttf" id="9_5t7ei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4mkg"]
 resource_name = "set"
@@ -313,4 +317,60 @@ position = Vector2(936, 231)
 position = Vector2(801, 224)
 
 [node name="Coin8" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(779, 250)
+position = Vector2(802, 253)
+
+[node name="UI Container" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="UI Container"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="TextureRect" parent="UI Container/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 103.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_7g0d4")
+stretch_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="mask" type="TextureRect" parent="UI Container/UI/HUD"]
+clip_children = 2
+layout_mode = 0
+offset_right = 151.0
+offset_bottom = 65.0
+texture = ExtResource("7_me3ln")
+metadata/_edit_lock_ = true
+
+[node name="Portrait" type="TextureRect" parent="UI Container/UI/HUD/mask"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 9.0
+offset_right = 52.0
+offset_bottom = 57.0
+texture = ExtResource("7_rld1l")
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="UI Container/UI/HUD"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 33.0
+offset_right = 139.0
+offset_bottom = 52.0
+theme_override_colors/font_outline_color = Color(0.321569, 0, 0.176471, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("9_5t7ei")
+text = "0
+"
