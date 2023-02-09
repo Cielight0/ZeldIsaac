@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://xh7cotliebuv"]
+[gd_scene load_steps=14 format=3 uid="uid://xh7cotliebuv"]
 
+[ext_resource type="Script" path="res://Autoload/Game.gd" id="1_ccd75"]
 [ext_resource type="PackedScene" uid="uid://ccxu5q6i2hr5e" path="res://Scenes/Characters/character.tscn" id="1_eigrf"]
 [ext_resource type="Texture2D" uid="uid://cwxyphq8na3to" path="res://assets/Tileset.png" id="2_liy7y"]
 [ext_resource type="PackedScene" uid="uid://b1uny8dsqwckh" path="res://Scenes/InteractiveObjects/jar.tscn" id="3_ub5sl"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cmcipm8bodccv" path="res://Scenes/UI/HUD/HUD.png" id="6_7g0d4"]
 [ext_resource type="Texture2D" uid="uid://bqbihtc2qdr72" path="res://Scenes/UI/HUD/HUD_Mask.png" id="7_me3ln"]
 [ext_resource type="Texture2D" uid="uid://ddryhfgpp1en6" path="res://Scenes/UI/HUD/Portrait.png" id="7_rld1l"]
+[ext_resource type="Script" path="res://Scenes/UI/HUD/HUD.gd" id="8_0wusw"]
 [ext_resource type="FontFile" uid="uid://cn5fuf0okhhdn" path="res://Scenes/UI/Font/BabaMediumPixels.ttf" id="9_5t7ei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4mkg"]
@@ -244,6 +246,7 @@ sources/0 = SubResource("TileSetAtlasSource_p4mkg")
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(2, 3)
+script = ExtResource("1_ccd75")
 
 [node name="Walls & ground" type="TileMap" parent="."]
 z_index = -1
@@ -343,6 +346,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_7g0d4")
 stretch_mode = 2
+script = ExtResource("8_0wusw")
 metadata/_edit_lock_ = true
 
 [node name="mask" type="TextureRect" parent="UI Container/UI/HUD"]
@@ -363,7 +367,7 @@ texture = ExtResource("7_rld1l")
 stretch_mode = 4
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="UI Container/UI/HUD"]
+[node name="CoinCounter" type="Label" parent="UI Container/UI/HUD"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 33.0

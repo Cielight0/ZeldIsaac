@@ -15,6 +15,11 @@ run/main_scene="res://Scenes/Levels/level.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GAME="*res://Autoload/Game.gd"
+EVENTS="*res://Autoload/Events.gd"
+
 [debug]
 
 settings/stretch/mode="canvas_items"
@@ -26,7 +31,6 @@ settings/size/viewport_width=640
 
 [display]
 
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 
