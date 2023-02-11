@@ -260,7 +260,6 @@ layer_0/tile_data = PackedInt32Array(-589839, 524288, 0, -589838, 524288, 0, -58
 
 [node name="Décorations" type="TileMap" parent="."]
 z_index = -1
-z_as_relative = false
 y_sort_enabled = true
 position = Vector2(541, 316)
 tile_set = SubResource("TileSet_kdnkh")
@@ -305,22 +304,22 @@ position = Vector2(778, 329)
 position = Vector2(887, 450)
 
 [node name="Coin3" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(934, 391)
+position = Vector2(586, 489)
 
 [node name="Coin4" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(984, 323)
+position = Vector2(376, 333)
 
 [node name="Coin5" parent="." instance=ExtResource("5_nnppm")]
 position = Vector2(870, 318)
 
 [node name="Coin6" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(936, 231)
+position = Vector2(400, 483)
 
 [node name="Coin7" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(801, 224)
+position = Vector2(307, 188)
 
 [node name="Coin8" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(802, 253)
+position = Vector2(614, 179)
 
 [node name="UI Container" type="CanvasLayer" parent="."]
 

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Character
 
 @export var speed = 250
 @export var friction = 1
@@ -50,14 +51,9 @@ signal moving_direction_changed
 ### INPUTS ###
 func get_input():
 	var input = Vector2()
-	if Input.is_action_pressed('ui_right'):
-		input.x+= 1
-	if Input.is_action_pressed('ui_left'):
-		input.x-= 1
-	if Input.is_action_pressed('ui_down'):
-		input.y+= 1
-	if Input.is_action_pressed('ui_up'):
-		input.y-= 1
+	input.x = int(Input.is_action_pressed('ui_right'))-int(Input.is_action_pressed('ui_left'))
+	input.y = int(Input.is_action_pressed('ui_down'))-int(Input.is_action_pressed('ui_up'))
+	
 	if Input.is_action_just_pressed('ui_accept'):
 		state = STATE.ATTACK
 	if moving_direction != Vector2.ZERO and state != STATE.ATTACK:
@@ -140,9 +136,11 @@ func _on_moving_direction_changed():
 		facing_direction = moving_direction
 
 func _hitbox_direction():
-	var angle = facing_direction.angle()-1.57079637050629
+	var angle = facing_direction.angle()-PI/2
 	attack_hitbox.set_rotation(angle)
 
 func _on_animated_player_animation_changed():
 	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
 		_attack_effect()
+			
+
