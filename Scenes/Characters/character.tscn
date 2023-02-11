@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://ccxu5q6i2hr5e"]
+[gd_scene load_steps=35 format=3 uid="uid://ccxu5q6i2hr5e"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Character.gd" id="1_rwfvd"]
 [ext_resource type="Texture2D" uid="uid://nbknjjq27xnn" path="res://assets/Character_SpriteSheet.png" id="2_t4wer"]
+[ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="3_2pxbm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_brfdc"]
 atlas = ExtResource("2_t4wer")
@@ -265,7 +266,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7k3u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idyhu"]
-size = Vector2(37, 15)
+size = Vector2(41.5, 15)
 
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(540, 317)
@@ -273,7 +274,8 @@ script = ExtResource("1_rwfvd")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_675jy")
-animation = &"MoveUp"
+animation = &"AttackDown"
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7k3u")
@@ -285,16 +287,19 @@ position = Vector2(1, -1)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(1, 26)
+position = Vector2(2.25, 24)
 shape = SubResource("RectangleShape2D_idyhu")
 debug_color = Color(0.407843, 0.462745, 1, 0.419608)
-metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2pxbm")
+volume_db = -4.0
 
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="moving_direction_changed" from="." to="." method="_on_moving_direction_changed"]

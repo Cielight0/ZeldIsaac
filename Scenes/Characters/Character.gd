@@ -1,12 +1,13 @@
 extends CharacterBody2D
 class_name Character
 
-@export var speed = 250
+@export var speed = 200
 @export var friction = 1
 @export var acceleration = 1
 
 @onready var animated_sprite = $AnimatedPlayer
 @onready var attack_hitbox = $AttackHitbox
+@onready var audiostream = $AudioStreamPlayer2D
 
 enum STATE {
 	IDLE,
@@ -72,6 +73,7 @@ func _find_dir_name(dir: Vector2) -> String:
 
 func _attack_effect()->void:
 	var bodies_array=attack_hitbox.get_overlapping_bodies()
+	audiostream.play()
 	print(bodies_array)
 	for body in bodies_array:
 		if body.has_method("destroy"):

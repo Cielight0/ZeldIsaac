@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://xh7cotliebuv"]
+[gd_scene load_steps=15 format=3 uid="uid://xh7cotliebuv"]
 
-[ext_resource type="Script" path="res://Autoload/Game.gd" id="1_ccd75"]
 [ext_resource type="PackedScene" uid="uid://ccxu5q6i2hr5e" path="res://Scenes/Characters/character.tscn" id="1_eigrf"]
+[ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_f5n83"]
 [ext_resource type="Texture2D" uid="uid://cwxyphq8na3to" path="res://assets/Tileset.png" id="2_liy7y"]
 [ext_resource type="PackedScene" uid="uid://b1uny8dsqwckh" path="res://Scenes/InteractiveObjects/jar.tscn" id="3_ub5sl"]
 [ext_resource type="PackedScene" uid="uid://cbe3ismqie25c" path="res://Scenes/InteractiveObjects/chest.tscn" id="4_8mf5w"]
-[ext_resource type="PackedScene" uid="uid://cc863vhdgryxk" path="res://Scenes/InteractiveObjects/Coin/coin.tscn" id="5_nnppm"]
 [ext_resource type="Texture2D" uid="uid://cmcipm8bodccv" path="res://Scenes/UI/HUD/HUD.png" id="6_7g0d4"]
 [ext_resource type="Texture2D" uid="uid://bqbihtc2qdr72" path="res://Scenes/UI/HUD/HUD_Mask.png" id="7_me3ln"]
 [ext_resource type="Texture2D" uid="uid://ddryhfgpp1en6" path="res://Scenes/UI/HUD/Portrait.png" id="7_rld1l"]
 [ext_resource type="Script" path="res://Scenes/UI/HUD/HUD.gd" id="8_0wusw"]
 [ext_resource type="FontFile" uid="uid://cn5fuf0okhhdn" path="res://Scenes/UI/Font/BabaMediumPixels.ttf" id="9_5t7ei"]
+[ext_resource type="Script" path="res://Scenes/Levels/CoinFactory.gd" id="11_i82lj"]
+[ext_resource type="AudioStream" uid="uid://cu75duys73myx" path="res://assets/Music/05 - DavidKBD - Belmont Chronicles Pack - Abandoned Church.ogg" id="12_t5wka"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4mkg"]
 resource_name = "set"
@@ -246,7 +247,7 @@ sources/0 = SubResource("TileSetAtlasSource_p4mkg")
 z_as_relative = false
 y_sort_enabled = true
 position = Vector2(2, 3)
-script = ExtResource("1_ccd75")
+script = ExtResource("1_f5n83")
 
 [node name="Walls & ground" type="TileMap" parent="."]
 z_index = -1
@@ -277,11 +278,6 @@ z_as_relative = false
 y_sort_enabled = true
 position = Vector2(561, 201)
 
-[node name="chest" parent="." instance=ExtResource("4_8mf5w")]
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(284, 172)
-
 [node name="Jar" parent="." instance=ExtResource("3_ub5sl")]
 z_as_relative = false
 y_sort_enabled = true
@@ -296,30 +292,6 @@ position = Vector2(659, 349)
 z_as_relative = false
 y_sort_enabled = true
 disable_mode = 2
-
-[node name="Coin" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(778, 329)
-
-[node name="Coin2" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(887, 450)
-
-[node name="Coin3" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(586, 489)
-
-[node name="Coin4" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(376, 333)
-
-[node name="Coin5" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(870, 318)
-
-[node name="Coin6" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(400, 483)
-
-[node name="Coin7" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(307, 188)
-
-[node name="Coin8" parent="." instance=ExtResource("5_nnppm")]
-position = Vector2(614, 179)
 
 [node name="UI Container" type="CanvasLayer" parent="."]
 
@@ -377,3 +349,29 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("9_5t7ei")
 text = "0
 "
+
+[node name="CoinFactory" type="Node2D" parent="."]
+position = Vector2(540, 317)
+script = ExtResource("11_i82lj")
+
+[node name="chest" parent="." instance=ExtResource("4_8mf5w")]
+position = Vector2(176, 128)
+
+[node name="chest2" parent="." instance=ExtResource("4_8mf5w")]
+position = Vector2(390, 230)
+
+[node name="chest3" parent="." instance=ExtResource("4_8mf5w")]
+position = Vector2(518, 227)
+
+[node name="chest4" parent="." instance=ExtResource("4_8mf5w")]
+position = Vector2(814, 309)
+
+[node name="chest5" parent="." instance=ExtResource("4_8mf5w")]
+position = Vector2(620, 141)
+
+[node name="chest6" parent="." instance=ExtResource("4_8mf5w")]
+position = Vector2(840, 177)
+
+[node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_t5wka")
+volume_db = -20.019
