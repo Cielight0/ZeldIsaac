@@ -215,6 +215,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n8bc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_358a7")
 }],
 "loop": true,
 "name": &"MoveDown",
@@ -229,6 +232,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4qx0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwafr")
 }],
 "loop": true,
 "name": &"MoveLeft",
@@ -243,6 +249,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2t378")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1c8t")
 }],
 "loop": true,
 "name": &"MoveRight",
@@ -257,6 +266,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vyihy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iawvl")
 }],
 "loop": true,
 "name": &"MoveUp",
@@ -274,8 +286,8 @@ script = ExtResource("1_rwfvd")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_675jy")
-animation = &"AttackDown"
-frame = 1
+animation = &"MoveDown"
+frame_progress = 0.750037
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_n7k3u")
@@ -294,6 +306,7 @@ debug_color = Color(0.407843, 0.462745, 1, 0.419608)
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 

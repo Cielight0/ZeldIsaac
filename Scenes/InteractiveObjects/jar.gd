@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @onready var animated_sprite = $AnimatedSprite
 @onready var collision_shape = $CollisionShape
+@onready var audiostream = $AudioStreamPlayer2D
 
 enum STATE{
 	IDLE,
@@ -14,6 +15,7 @@ var state : int = STATE.IDLE
 func destroy()->void:
 	if state == STATE.IDLE:
 		state = STATE.BREAKING
+		audiostream.play()
 		collision_shape.set_disabled(true)
 		animated_sprite.play("Breaking")
 		

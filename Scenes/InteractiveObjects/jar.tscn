@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1uny8dsqwckh"]
+[gd_scene load_steps=13 format=3 uid="uid://b1uny8dsqwckh"]
 
 [ext_resource type="Script" path="res://Scenes/InteractiveObjects/jar.gd" id="1_g5ofe"]
 [ext_resource type="Texture2D" uid="uid://i30syciw2305" path="res://assets/Jar_SpriteSheet.png" id="1_yv1ui"]
+[ext_resource type="AudioStream" uid="uid://1i3nlgfytuox" path="res://assets/JarBreak.ogg" id="3_o3x4s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fc8k2"]
 atlas = ExtResource("1_yv1ui")
@@ -83,5 +84,9 @@ animation = &"Idle"
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_xi5aw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_o3x4s")
+volume_db = -15.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]
