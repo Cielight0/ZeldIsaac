@@ -44,7 +44,7 @@ func _ready()-> void:
 func _init_spawn_values()-> void:
 	var rdm_angle = randf_range(0, 360)
 	spawn_dir = Vector2(sin(rdm_angle),cos(rdm_angle))
-	
+
 
 func _spawn(delta):
 	spawn_v_force += GRAVITY

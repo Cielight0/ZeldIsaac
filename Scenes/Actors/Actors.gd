@@ -50,6 +50,9 @@ signal moving_direction_changed
 
 ### LOGIC ###
 
+#func _ready()-> void:
+#	print("hello")
+
 func _find_dir_name(dir: Vector2) -> String:
 	var direction = ""
 	for dir_name in dir_dict:

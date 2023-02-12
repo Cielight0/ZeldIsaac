@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://dhx1uhqrwjarl"]
+[gd_scene load_steps=39 format=3 uid="uid://dhx1uhqrwjarl"]
 
 [ext_resource type="PackedScene" uid="uid://b84n1rxw5q427" path="res://Scenes/Actors/Enemies/enemy.tscn" id="1_46lum"]
+[ext_resource type="Script" path="res://Scenes/Actors/Enemies/Skeleton/skeleton.gd" id="2_k04qp"]
 [ext_resource type="Texture2D" uid="uid://h58y16j013vm" path="res://assets/Squelette_SpriteSheet.png" id="2_o7qe0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_teatq"]
@@ -297,6 +298,7 @@ height = 36.0
 size = Vector2(33, 20)
 
 [node name="Skeleton" instance=ExtResource("1_46lum")]
+script = ExtResource("2_k04qp")
 
 [node name="AnimatedPlayer" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_nyvvw")
