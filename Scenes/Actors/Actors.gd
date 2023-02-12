@@ -50,9 +50,6 @@ signal moving_direction_changed
 
 ### LOGIC ###
 
-#func _ready()-> void:
-#	print("hello")
-
 func _find_dir_name(dir: Vector2) -> String:
 	var direction = ""
 	for dir_name in dir_dict:
@@ -87,6 +84,7 @@ func update_animation():
 
 func _on_animated_player_animation_finished():
 	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
+#		_attack_effect()
 		state=STATE.IDLE
 
 func _on_facing_direction_changed():
@@ -107,9 +105,19 @@ func _on_moving_direction_changed():
 		facing_direction = moving_direction
 
 
-func _on_animated_player_animation_changed():
-	pass
-
+#func _on_animated_player_animation_changed():
+#	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
+#		_attack_effect()
 
 func _on_state_changed():
-	pass # Replace with function body.
+	update_animation()
+
+
+#	EVENTS.coin_collected.connect(_on_EVENTS_coin_collected)
+
+
+func _on_animated_player_frame_changed():
+	if animated_sprite.frame == 2:
+		if "Attack".is_subsequence_of(animated_sprite.get_animation()):
+			_attack_effect()
+			print("frame change!")

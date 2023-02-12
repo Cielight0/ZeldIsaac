@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://Scenes/Levels/CoinFactory.gd" id="11_i82lj"]
 [ext_resource type="PackedScene" uid="uid://boxqmg07xhpgo" path="res://Scenes/Actors/Characters/characterNew.tscn" id="12_aw202"]
 [ext_resource type="AudioStream" uid="uid://cu75duys73myx" path="res://assets/Music/05 - DavidKBD - Belmont Chronicles Pack - Abandoned Church.ogg" id="12_t5wka"]
-[ext_resource type="PackedScene" uid="uid://dhx1uhqrwjarl" path="res://Scenes/Actors/Enemies/Skeleton/skeleton.tscn" id="13_beagy"]
+[ext_resource type="PackedScene" uid="uid://70fr3edppai6" path="res://Scenes/Actors/Enemy/Skeleton/skeleton.tscn" id="13_x860a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4mkg"]
 resource_name = "set"
@@ -372,8 +372,8 @@ position = Vector2(840, 177)
 stream = ExtResource("12_t5wka")
 volume_db = -20.019
 
-[node name="Actor" parent="." instance=ExtResource("12_aw202")]
-position = Vector2(524, 328)
+[node name="Character" parent="." instance=ExtResource("12_aw202")]
+position = Vector2(535, 315)
 
-[node name="Skeleton" parent="." instance=ExtResource("13_beagy")]
-position = Vector2(670, 386)
+[node name="Skeleton" parent="." instance=ExtResource("13_x860a")]
+position = Vector2(490, 359)

@@ -90,4 +90,6 @@ volume_db = -4.0
 [connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
 [connection signal="moving_direction_changed" from="." to="." method="_on_moving_direction_changed"]
 [connection signal="state_changed" from="." to="." method="_on_state_changed"]
+[connection signal="animation_changed" from="AnimatedPlayer" to="." method="_on_animated_player_animation_changed"]
 [connection signal="animation_finished" from="AnimatedPlayer" to="." method="_on_animated_player_animation_finished"]
+[connection signal="frame_changed" from="AnimatedPlayer" to="." method="_on_animated_player_frame_changed"]

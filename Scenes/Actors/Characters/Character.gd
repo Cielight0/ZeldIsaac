@@ -45,6 +45,3 @@ func _on_state_changed():
 			state = STATE.ATTACK
 	update_animation()
 
-func _on_animated_player_animation_changed():
-		if "Attack".is_subsequence_of(animated_sprite.get_animation()):
-			_attack_effect()
