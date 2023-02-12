@@ -43,7 +43,6 @@ func _ready()-> void:
 
 func _init_spawn_values()-> void:
 	var rdm_angle = randf_range(0, 360)
-	print(rdm_angle)
 	spawn_dir = Vector2(sin(rdm_angle),cos(rdm_angle))
 	
 
@@ -62,14 +61,12 @@ func _physics_process(delta)->void:
 
 func _follow(delta)->void:
 	if state == STATE.FOLLOW:
-		print(target.get_position())
 		var target_pos = target.get_position()
 		var spd = speed * delta
 
 		if position.distance_to(target_pos) < spd:
 			position = target_pos
 			collect()
-			print(position)
 		else:
 			position = position.move_toward(target_pos,spd)
 
@@ -91,7 +88,6 @@ func _on_area_2d_body_entered(body):
 
 func _on_audio_stream_player_2d_finished():
 	queue_free()
-	print("clear")
 
 
 func _on_animation_player_animation_finished():

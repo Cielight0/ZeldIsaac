@@ -12,5 +12,5 @@ func _spawn_coin(pos: Vector2, nb_coin : int)->void:
 		owner.add_child(coin)
 
 func _on_EVENTS_spawn_coin(pos:Vector2):
-	var nb_coin = randf_range(1, 5)
+	var nb_coin = randi_range(1, 5)
 	_spawn_coin(pos,nb_coin)

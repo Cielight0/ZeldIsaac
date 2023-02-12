@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=3 uid="uid://xh7cotliebuv"]
+[gd_scene load_steps=15 format=3 uid="uid://bndrqq543va4w"]
 
-[ext_resource type="PackedScene" uid="uid://ccxu5q6i2hr5e" path="res://Scenes/Characters/character.tscn" id="1_eigrf"]
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_f5n83"]
 [ext_resource type="Texture2D" uid="uid://cwxyphq8na3to" path="res://assets/Tileset.png" id="2_liy7y"]
 [ext_resource type="PackedScene" uid="uid://b1uny8dsqwckh" path="res://Scenes/InteractiveObjects/jar.tscn" id="3_ub5sl"]
@@ -12,6 +11,7 @@
 [ext_resource type="FontFile" uid="uid://cn5fuf0okhhdn" path="res://Scenes/UI/Font/BabaMediumPixels.ttf" id="9_5t7ei"]
 [ext_resource type="Script" path="res://Scenes/Levels/CoinFactory.gd" id="11_i82lj"]
 [ext_resource type="AudioStream" uid="uid://cu75duys73myx" path="res://assets/Music/05 - DavidKBD - Belmont Chronicles Pack - Abandoned Church.ogg" id="12_t5wka"]
+[ext_resource type="PackedScene" uid="uid://d0ai0h84aclba" path="res://Scenes/Actors/Characters/character.tscn" id="12_y6usl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4mkg"]
 resource_name = "set"
@@ -288,11 +288,6 @@ z_as_relative = false
 y_sort_enabled = true
 position = Vector2(659, 349)
 
-[node name="Character" parent="." instance=ExtResource("1_eigrf")]
-z_as_relative = false
-y_sort_enabled = true
-disable_mode = 2
-
 [node name="UI Container" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Control" parent="UI Container"]
@@ -375,3 +370,11 @@ position = Vector2(840, 177)
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_t5wka")
 volume_db = -20.019
+
+[node name="Character" parent="." instance=ExtResource("12_y6usl")]
+speed = 200
+friction = 1
+acceleration = 1
+state = 0
+facing_direction = Vector2(0, 1)
+moving_direction = Vector2(0, 1)
