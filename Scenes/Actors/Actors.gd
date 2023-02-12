@@ -107,3 +107,7 @@ func _on_moving_direction_changed():
 func _on_animated_player_animation_changed():
 	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
 		_attack_effect()
+
+
+func _on_state_changed():
+	pass # Replace with function body.

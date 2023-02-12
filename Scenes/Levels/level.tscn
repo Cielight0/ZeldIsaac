@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://Scenes/UI/HUD/HUD.gd" id="8_0wusw"]
 [ext_resource type="FontFile" uid="uid://cn5fuf0okhhdn" path="res://Scenes/UI/Font/BabaMediumPixels.ttf" id="9_5t7ei"]
 [ext_resource type="Script" path="res://Scenes/Levels/CoinFactory.gd" id="11_i82lj"]
+[ext_resource type="PackedScene" uid="uid://boxqmg07xhpgo" path="res://Scenes/Actors/Characters/characterNew.tscn" id="12_aw202"]
 [ext_resource type="AudioStream" uid="uid://cu75duys73myx" path="res://assets/Music/05 - DavidKBD - Belmont Chronicles Pack - Abandoned Church.ogg" id="12_t5wka"]
-[ext_resource type="PackedScene" uid="uid://d0ai0h84aclba" path="res://Scenes/Actors/Characters/character.tscn" id="12_y6usl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4mkg"]
 resource_name = "set"
@@ -371,4 +371,5 @@ position = Vector2(840, 177)
 stream = ExtResource("12_t5wka")
 volume_db = -20.019
 
-[node name="Character" parent="." instance=ExtResource("12_y6usl")]
+[node name="Actor" parent="." instance=ExtResource("12_aw202")]
+position = Vector2(524, 328)
