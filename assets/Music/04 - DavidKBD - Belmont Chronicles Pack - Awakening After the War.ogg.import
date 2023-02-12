@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bfp0wfknejvdq"
+path="res://.godot/imported/04 - DavidKBD - Belmont Chronicles Pack - Awakening After the War.ogg-d4fa9e7c2bb49e10c480ebcf104c3ab3.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Music/04 - DavidKBD - Belmont Chronicles Pack - Awakening After the War.ogg"
+dest_files=["res://.godot/imported/04 - DavidKBD - Belmont Chronicles Pack - Awakening After the War.ogg-d4fa9e7c2bb49e10c480ebcf104c3ab3.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

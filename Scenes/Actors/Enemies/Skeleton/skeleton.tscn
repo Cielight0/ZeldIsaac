@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhx1uhqrwjarl"]
+
+[ext_resource type="Script" path="res://Scenes/Actors/Enemies/Skeleton/skeleton.gd" id="1_yl05r"]
+
+[node name="Skeleton" type="CharacterBody2D"]
+script = ExtResource("1_yl05r")

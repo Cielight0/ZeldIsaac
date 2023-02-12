@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://3pgc34iauk56"
+path="res://.godot/imported/09 - DavidKBD - Belmont Chronicles Pack - The Catacombs.ogg-826c1f48fdad1cd225e3c8207bf64dbf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Music/09 - DavidKBD - Belmont Chronicles Pack - The Catacombs.ogg"
+dest_files=["res://.godot/imported/09 - DavidKBD - Belmont Chronicles Pack - The Catacombs.ogg-826c1f48fdad1cd225e3c8207bf64dbf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

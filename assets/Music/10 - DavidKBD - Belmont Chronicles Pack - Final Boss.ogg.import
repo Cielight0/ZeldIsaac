@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://xv44w2elcron"
+path="res://.godot/imported/10 - DavidKBD - Belmont Chronicles Pack - Final Boss.ogg-a74a6bc40675062c8fdf527224fbd1f4.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Music/10 - DavidKBD - Belmont Chronicles Pack - Final Boss.ogg"
+dest_files=["res://.godot/imported/10 - DavidKBD - Belmont Chronicles Pack - Final Boss.ogg-a74a6bc40675062c8fdf527224fbd1f4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

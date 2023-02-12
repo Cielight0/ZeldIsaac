@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cxtnvl50rry27"
+path="res://.godot/imported/07 - DavidKBD - Belmont Chronicles Pack - Boss.ogg-6d0fd91d4fa42bb7e36b2978483e6823.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Music/07 - DavidKBD - Belmont Chronicles Pack - Boss.ogg"
+dest_files=["res://.godot/imported/07 - DavidKBD - Belmont Chronicles Pack - Boss.ogg-6d0fd91d4fa42bb7e36b2978483e6823.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

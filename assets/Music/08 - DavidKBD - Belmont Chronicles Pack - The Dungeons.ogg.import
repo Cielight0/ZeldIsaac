@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://vf8w6vvl5wac"
+path="res://.godot/imported/08 - DavidKBD - Belmont Chronicles Pack - The Dungeons.ogg-d6b1bde7cf6087c9868c5bc8b334b1ba.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Music/08 - DavidKBD - Belmont Chronicles Pack - The Dungeons.ogg"
+dest_files=["res://.godot/imported/08 - DavidKBD - Belmont Chronicles Pack - The Dungeons.ogg-d6b1bde7cf6087c9868c5bc8b334b1ba.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

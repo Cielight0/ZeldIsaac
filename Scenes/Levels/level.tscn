@@ -372,9 +372,3 @@ stream = ExtResource("12_t5wka")
 volume_db = -20.019
 
 [node name="Character" parent="." instance=ExtResource("12_y6usl")]
-speed = 200
-friction = 1
-acceleration = 1
-state = 0
-facing_direction = Vector2(0, 1)
-moving_direction = Vector2(0, 1)
