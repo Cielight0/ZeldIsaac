@@ -6,6 +6,9 @@ extends Node2D
 @onready var coinsprite = $CoinSprite
 @onready var shadowsprite = $ShadowSprite
 @onready var animation_player = $AnimationPlayer
+@onready var timer = $Timer
+
+signal state_changed
 
 enum STATE{
 	SPAWN,
@@ -14,17 +17,50 @@ enum STATE{
 	COLLECT
 }
 
-var speed : float = 400
-var state : int = STATE.IDLE
+const GRAVITY := 40
+
+var speed : float = 500
 var target : Node2D = null
 
-func _ready()-> void:
-	animation_player.play("wave")
+var spawn_v_force : float = -400
+var spawn_dir_force : float = 50
+var spawn_dir := Vector2.ZERO
+var spawn_dir_velocity := Vector2.ZERO
+var damping := 20
 
+@export var state : int = STATE.SPAWN:
+	set(value):
+		if value != state:
+			state = value
+			emit_signal("state_changed")
+	get:
+		return state
+
+func _ready()-> void:
+	particules.set_emitting(false)
+	animation_player.play("wave")
+	_init_spawn_values()
+
+func _init_spawn_values()-> void:
+	var rdm_angle = randf_range(0, 360)
+	print(rdm_angle)
+	spawn_dir = Vector2(sin(rdm_angle),cos(rdm_angle))
+	
+
+func _spawn(delta):
+	spawn_v_force += GRAVITY
+	var spawn_v_velocity = Vector2(0,spawn_v_force)
+	spawn_dir_velocity = spawn_dir * spawn_dir_force
+	var velocity = spawn_v_velocity + spawn_dir_velocity
+	position += velocity*delta
 
 func _physics_process(delta)->void:
-	particules.set_emitting(false)
+	match(state):
+		STATE.FOLLOW: _follow(delta)
+		STATE.SPAWN: _spawn(delta)
 
+
+func _follow(delta)->void:
 	if state == STATE.FOLLOW:
 		print(target.get_position())
 		var target_pos = target.get_position()
@@ -32,8 +68,8 @@ func _physics_process(delta)->void:
 
 		if position.distance_to(target_pos) < spd:
 			position = target_pos
-			print(position)
 			collect()
+			print(position)
 		else:
 			position = position.move_toward(target_pos,spd)
 
@@ -67,3 +103,16 @@ func _on_animation_player_animation_finished():
 func _on_timer_timeout():
 	coinsprite.play("Rotation")
 	shadowsprite.play("Rotation")	
+
+
+func _on_spawn_duration_timer_timeout():
+	state = STATE.IDLE
+
+
+func _on_state_changed():
+	if state == STATE.IDLE:
+		for body in area.get_overlapping_bodies():
+			if body is Character:
+				state = STATE.FOLLOW
+				target = body
+				animation_player.stop()
