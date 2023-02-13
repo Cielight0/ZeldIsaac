@@ -376,4 +376,8 @@ volume_db = -20.019
 position = Vector2(535, 315)
 
 [node name="Skeleton" parent="." instance=ExtResource("13_x860a")]
-position = Vector2(490, 359)
+position = Vector2(661, 322)
+
+[connection signal="facing_direction_changed" from="Character" to="Character" method="_on_facing_direction_changed" flags=18]
+[connection signal="moving_direction_changed" from="Character" to="Character" method="_on_moving_direction_changed" flags=18]
+[connection signal="state_changed" from="Character" to="Character" method="_on_state_changed" flags=18]
