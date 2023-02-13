@@ -1,47 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0ai0h84aclba"]
+[gd_scene load_steps=7 format=3 uid="uid://boxqmg07xhpgo"]
 
-[ext_resource type="Script" path="res://Scenes/Actors/Characters/Character.gd" id="1_45o32"]
-[ext_resource type="SpriteFrames" uid="uid://d0l78rhqeiu1r" path="res://Scenes/Actors/Characters/CharacterSpriteFrame.tres" id="2_4gan4"]
-[ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="3_835x8"]
-[ext_resource type="Shape2D" uid="uid://crlo4ph7usr2x" path="res://Scenes/Actors/Characters/CharacterHitbox.tres" id="3_cie88"]
-[ext_resource type="Shape2D" uid="uid://wc4o5ob4gb8a" path="res://Scenes/Actors/Characters/CharacterAttackHitbox.tres" id="4_luabv"]
+[ext_resource type="PackedScene" uid="uid://beldfg84pufbi" path="res://Scenes/Actors/Actor.tscn" id="1_s7o4m"]
+[ext_resource type="Script" path="res://Scenes/Actors/Characters/Character.gd" id="2_rgbi2"]
+[ext_resource type="SpriteFrames" uid="uid://d0l78rhqeiu1r" path="res://Scenes/Actors/Characters/CharacterSpriteFrame.tres" id="3_6wu55"]
+[ext_resource type="Shape2D" uid="uid://crlo4ph7usr2x" path="res://Scenes/Actors/Characters/CharacterHitbox.tres" id="4_phw6l"]
+[ext_resource type="Shape2D" uid="uid://wc4o5ob4gb8a" path="res://Scenes/Actors/Characters/CharacterAttackHitbox.tres" id="5_7gfat"]
+[ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="6_k7e53"]
 
-[node name="Character" type="CharacterBody2D"]
-position = Vector2(540, 317)
-script = ExtResource("1_45o32")
+[node name="Character" instance=ExtResource("1_s7o4m")]
+script = ExtResource("2_rgbi2")
 
-[node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_4gan4")
-animation = &"MoveDown"
-frame_progress = 0.750037
+[node name="AnimatedPlayer" parent="." index="0"]
+sprite_frames = ExtResource("3_6wu55")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = ExtResource("3_cie88")
-one_way_collision_margin = 0.0
-debug_color = Color(0.866667, 0, 0.858824, 0.419608)
+[node name="CollisionShape2D" parent="." index="1"]
+shape = ExtResource("4_phw6l")
 
-[node name="AttackHitbox" type="Area2D" parent="."]
-position = Vector2(1, -1)
-metadata/_edit_lock_ = true
+[node name="CollisionShape2D" parent="AttackHitbox" index="0"]
+shape = ExtResource("5_7gfat")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-position = Vector2(2.25, 24)
-shape = ExtResource("4_luabv")
-debug_color = Color(0.407843, 0.462745, 1, 0.419608)
+[node name="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("6_k7e53")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_835x8")
-volume_db = -4.0
-
-[connection signal="facing_direction_changed" from="." to="." method="_on_facing_direction_changed"]
-[connection signal="moving_direction_changed" from="." to="." method="_on_moving_direction_changed"]
-[connection signal="state_changed" from="." to="." method="_on_state_changed"]
-[connection signal="animation_changed" from="AnimatedPlayer" to="." method="_on_animated_player_animation_changed"]
-[connection signal="animation_finished" from="AnimatedPlayer" to="." method="_on_animated_player_animation_finished"]

@@ -4,15 +4,11 @@ class_name Actor
 @export var friction = 1
 @export var acceleration = 1
 
+@onready var statemachine = $StateMachine
 @onready var animated_sprite = $AnimatedPlayer
 @onready var attack_hitbox = $AttackHitbox
 @onready var audiostream = $AudioStreamPlayer2D
 
-enum STATE {
-	IDLE,
-	MOVE,
-	ATTACK
-}
 
 var dir_dict : Dictionary = {
 	"Left": Vector2.LEFT,
@@ -26,14 +22,6 @@ signal facing_direction_changed
 signal moving_direction_changed
 
 ### ACCESSORS###
-@export var state : int = STATE.IDLE:
-	set(value):
-		if value != state:
-			state = value
-			emit_signal("state_changed")
-	get:
-		return state
-
 @export var facing_direction := Vector2.DOWN:
 	set(value):
 		if value !=facing_direction:
@@ -50,12 +38,14 @@ signal moving_direction_changed
 
 ### Connections ###
 func _ready() -> void:
-	state_changed.connect(_on_state_changed)
+	statemachine.state_changed.connect(_on_state_changed)
 	facing_direction_changed.connect(_on_facing_direction_changed)
 	moving_direction_changed.connect(_on_moving_direction_changed)
 	animated_sprite.animation_changed.connect(_on_animated_player_animation_changed)
 	animated_sprite.frame_changed.connect(_on_animated_player_frame_changed)
 	animated_sprite.animation_finished.connect(_on_animated_player_animation_finished)
+	
+	statemachine.set_state("Idle")
 	
 ### LOGIC ###	
 func _find_dir_name(dir: Vector2) -> String:
@@ -72,7 +62,6 @@ func _hitbox_direction():
 
 func _attack_effect()->void:
 	var bodies_array=attack_hitbox.get_overlapping_bodies()
-	print("attack")
 	audiostream.play()
 	print(bodies_array)
 	for body in bodies_array:
@@ -81,23 +70,20 @@ func _attack_effect()->void:
 
 func update_animation():
 	var dir_name = _find_dir_name(facing_direction)
-	var state_name=""
+	var state_name=statemachine.get_state_name()
 	
-	match(state):
-		STATE.IDLE: state_name = "Idle"
-		STATE.MOVE : state_name = "Move"
-		STATE.ATTACK : state_name = "Attack"
-	animated_sprite.play(state_name+dir_name)
+	if state_name != "":
+		animated_sprite.play(state_name+dir_name)
 
 ### SIGNAL RESPONSES###
 
 func _on_animated_player_animation_finished():
 	if "Attack".is_subsequence_of(animated_sprite.get_animation()):
-		state=STATE.IDLE
+		statemachine.set_state("Idle")
 
 func _on_facing_direction_changed():
 	_hitbox_direction()
-	if state != STATE.ATTACK:
+	if statemachine.get_state_name() != "Attack":
 		update_animation()
 
 func _on_moving_direction_changed():
@@ -112,14 +98,13 @@ func _on_moving_direction_changed():
 	else:
 		facing_direction = moving_direction
 
-func _on_state_changed():
+func _on_state_changed(_new_state:Node)->void:
 	update_animation()
 
 func _on_animated_player_frame_changed():
 	if animated_sprite.frame == 2:
 		if "Attack".is_subsequence_of(animated_sprite.get_animation()):
 			_attack_effect()
-			print("frame change!")
 
 
 func _on_animated_player_animation_changed():

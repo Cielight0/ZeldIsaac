@@ -8,18 +8,18 @@ func get_input():
 	input.y = int(Input.is_action_pressed('ui_down'))-int(Input.is_action_pressed('ui_up'))
 	
 	if Input.is_action_just_pressed('ui_accept'):
-		state = STATE.ATTACK
-	if moving_direction != Vector2.ZERO and state != STATE.ATTACK:
-		state = STATE.MOVE
-	if moving_direction == Vector2.ZERO and state != STATE.ATTACK:
-		state = STATE.IDLE
+		statemachine.set_state("Attack")
+	if moving_direction != Vector2.ZERO and statemachine.get_state_name() != "Attack":
+		statemachine.set_state("Move")
+	if moving_direction == Vector2.ZERO and statemachine.get_state_name() != "Attack":
+		statemachine.set_state("Idle")
 	return input
 		
 ### LOGIC ###
 func _physics_process(_delta):
 #Fonction à découpler
 	moving_direction = get_input()
-	if moving_direction.length() > 0 and state != STATE.ATTACK:
+	if moving_direction.length() > 0 and statemachine.get_state_name() != "Attack":
 		velocity = velocity.lerp(moving_direction.normalized() * speed, acceleration)
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
@@ -37,11 +37,11 @@ func _interaction_attempt():
 
 ###SIGNAL RESPONSES###
 
-func _on_state_changed():
-	if state == STATE.ATTACK:
+func _on_state_changed(_new_state:Node)->void:
+	if statemachine.get_state_name() == "Attack":
 		if _interaction_attempt()==true:
-			state = STATE.IDLE
+			statemachine.set_state("Idle")
 		else:
-			state = STATE.ATTACK
+			statemachine.set_state("Attack")
 	update_animation()
 
