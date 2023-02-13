@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://boxqmg07xhpgo"]
+
+[ext_resource type="PackedScene" uid="uid://beldfg84pufbi" path="res://Scenes/Actors/Actor.tscn" id="1_6eyo8"]
+[ext_resource type="SpriteFrames" uid="uid://d0l78rhqeiu1r" path="res://Scenes/Actors/Characters/CharacterSpriteFrame.tres" id="2_jcf71"]
+[ext_resource type="Script" path="res://Scenes/Actors/Characters/Character.gd" id="2_t7jrk"]
+[ext_resource type="Shape2D" uid="uid://crlo4ph7usr2x" path="res://Scenes/Actors/Characters/CharacterHitbox.tres" id="3_2dval"]
+[ext_resource type="Shape2D" uid="uid://wc4o5ob4gb8a" path="res://Scenes/Actors/Characters/CharacterAttackHitbox.tres" id="4_3xiib"]
+[ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="5_qmpxr"]
+
+[node name="Character" instance=ExtResource("1_6eyo8")]
+script = ExtResource("2_t7jrk")
+
+[node name="AnimatedPlayer" parent="." index="0"]
+sprite_frames = ExtResource("2_jcf71")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = ExtResource("3_2dval")
+
+[node name="CollisionShape2D" parent="AttackHitbox" index="0"]
+shape = ExtResource("4_3xiib")
+
+[node name="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("5_qmpxr")
+
+[node name="Camera2D" type="Camera2D" parent="." index="4"]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true

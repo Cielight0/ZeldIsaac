@@ -11,6 +11,9 @@ enum STATE{
 
 var state : int = STATE.CLOSED
 
+func _ready():
+	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
+	
 func interact():
 	if state == STATE.CLOSED:
 		state = STATE.OPENNING

@@ -44,3 +44,4 @@ func _on_state_changed():
 		else:
 			state = STATE.ATTACK
 	update_animation()
+
