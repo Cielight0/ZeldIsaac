@@ -3,20 +3,16 @@ extends StaticBody2D
 @onready var animated_sprite = $AnimatedSprite
 @onready var collision_shape = $CollisionShape
 
-enum STATE{
-	CLOSED,
-	OPENNING,
-	OPENED
-}
+@onready var state_machine = $StateMachine
 
-var state : int = STATE.CLOSED
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_animated_sprite_animation_finished)
 	
 func interact():
-	if state == STATE.CLOSED:
-		state = STATE.OPENNING
+	if state_machine.get_state_name() == "Closed":
+		print("le coffre est fermé")
+		state_machine.set_state("Openning")
 		animated_sprite.play("Openning")
 		
 func _spawn_content()->void:
@@ -25,6 +21,6 @@ func _spawn_content()->void:
 
 func _on_animated_sprite_animation_finished():
 	if animated_sprite.get_animation() == "Openning":
-		state = STATE.OPENED
+		state_machine.set_state("Opened")
 		_spawn_content()
 		print("opened")

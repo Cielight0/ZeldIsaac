@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://boxqmg07xhpgo"]
+[gd_scene load_steps=8 format=3 uid="uid://boxqmg07xhpgo"]
 
 [ext_resource type="PackedScene" uid="uid://beldfg84pufbi" path="res://Scenes/Actors/Actor.tscn" id="1_s7o4m"]
 [ext_resource type="Script" path="res://Scenes/Actors/Characters/Character.gd" id="2_rgbi2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shape2D" uid="uid://crlo4ph7usr2x" path="res://Scenes/Actors/Characters/CharacterHitbox.tres" id="4_phw6l"]
 [ext_resource type="Shape2D" uid="uid://wc4o5ob4gb8a" path="res://Scenes/Actors/Characters/CharacterAttackHitbox.tres" id="5_7gfat"]
 [ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="6_k7e53"]
+[ext_resource type="Script" path="res://Scenes/Actors/Characters/State/ActorMoveState.gd" id="7_pbf6p"]
 
 [node name="Character" instance=ExtResource("1_s7o4m")]
 script = ExtResource("2_rgbi2")
@@ -28,3 +29,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="Move" parent="StateMachine" index="2"]
+script = ExtResource("7_pbf6p")

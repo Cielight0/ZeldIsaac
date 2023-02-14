@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dn0psv3ohug7g"]
+[gd_scene load_steps=7 format=3 uid="uid://dn0psv3ohug7g"]
 
 [ext_resource type="PackedScene" uid="uid://dy0slsvbgpw6u" path="res://Scenes/Actors/Enemy/enemy.tscn" id="1_bvvee"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/skeleton.gd" id="2_jf4i4"]
 [ext_resource type="SpriteFrames" uid="uid://rraednx6ydu4" path="res://Scenes/Actors/Enemy/Skeleton/skeletonSpriteFrame.tres" id="3_x8oox"]
+[ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="4_giogj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2k0k"]
 
@@ -20,3 +21,6 @@ shape = SubResource("CapsuleShape2D_r2k0k")
 
 [node name="CollisionShape2D" parent="AttackHitbox" index="0"]
 shape = SubResource("RectangleShape2D_xtgaq")
+
+[node name="AudioStreamPlayer2D" parent="." index="3"]
+stream = ExtResource("4_giogj")

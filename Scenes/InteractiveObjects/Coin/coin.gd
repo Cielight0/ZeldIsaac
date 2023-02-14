@@ -7,15 +7,9 @@ extends Node2D
 @onready var shadowsprite = $ShadowSprite
 @onready var animation_player = $AnimationPlayer
 @onready var timer = $Timer
+@onready var state_machine = $StateMachine
 
 signal state_changed
-
-enum STATE{
-	SPAWN,
-	IDLE,
-	FOLLOW,
-	COLLECT
-}
 
 const GRAVITY := 40
 
@@ -28,15 +22,11 @@ var spawn_dir := Vector2.ZERO
 var spawn_dir_velocity := Vector2.ZERO
 var damping := 20
 
-@export var state : int = STATE.SPAWN:
-	set(value):
-		if value != state:
-			state = value
-			emit_signal("state_changed")
-	get:
-		return state
 
 func _ready()-> void:
+	state_machine.state_changed.connect(_on_state_changed)
+	audiostream.finished.connect(_on_audio_stream_player_2d_finished)
+	
 	particules.set_emitting(false)
 	animation_player.play("wave")
 	_init_spawn_values()
@@ -54,13 +44,14 @@ func _spawn(delta):
 	position += velocity*delta
 
 func _physics_process(delta)->void:
-	match(state):
-		STATE.FOLLOW: _follow(delta)
-		STATE.SPAWN: _spawn(delta)
+	if state_machine.get_state_name() == "Follow":
+		_follow(delta)
+	if state_machine.get_state_name() == "Spawn":
+		_spawn(delta)
 
 
 func _follow(delta)->void:
-	if state == STATE.FOLLOW:
+	if state_machine.get_state_name() == "Follow":
 		var target_pos = target.get_position()
 		var spd = speed * delta
 
@@ -71,7 +62,7 @@ func _follow(delta)->void:
 			position = position.move_toward(target_pos,spd)
 
 func collect():
-	state = STATE.COLLECT
+	state_machine.set_state("Collect")
 	coinsprite.set_visible(false)
 	shadowsprite.set_visible(false)
 	particules.set_emitting(true)
@@ -80,8 +71,8 @@ func collect():
 
 
 func _on_area_2d_body_entered(body):
-	if state == STATE.IDLE and body is Character:
-		state = STATE.FOLLOW
+	if state_machine.get_state_name() == "Idle" and body is Character:
+		state_machine.set_state("Follow")
 		target = body
 		animation_player.stop()
 
@@ -102,13 +93,14 @@ func _on_timer_timeout():
 
 
 func _on_spawn_duration_timer_timeout():
-	state = STATE.IDLE
+	state_machine.set_state("Idle")
 
 
-func _on_state_changed():
-	if state == STATE.IDLE:
+func _on_state_changed(_new_state:Node):
+	if state_machine.get_state_name() == "Idle":
 		for body in area.get_overlapping_bodies():
+			print("ya un body !")
 			if body is Character:
-				state = STATE.FOLLOW
+				state_machine.set_state("Follow")
 				target = body
 				animation_player.stop()

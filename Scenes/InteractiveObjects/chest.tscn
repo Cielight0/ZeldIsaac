@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbe3ismqie25c"]
+[gd_scene load_steps=14 format=3 uid="uid://cbe3ismqie25c"]
 
 [ext_resource type="Script" path="res://Scenes/InteractiveObjects/chest.gd" id="1_reqf7"]
 [ext_resource type="Texture2D" uid="uid://jr8g32d2ewe1" path="res://assets/Chest_SpriteSheet.png" id="2_qbfki"]
+[ext_resource type="Script" path="res://StateMachine/StateMachine.gd" id="3_t61ad"]
+[ext_resource type="Script" path="res://StateMachine/state.gd" id="4_xjita"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwhno"]
 atlas = ExtResource("2_qbfki")
@@ -83,3 +85,15 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_c6ud2")
 metadata/_edit_lock_ = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_t61ad")
+
+[node name="Closed" type="Node" parent="StateMachine"]
+script = ExtResource("4_xjita")
+
+[node name="Openning" type="Node" parent="StateMachine"]
+script = ExtResource("4_xjita")
+
+[node name="Opened" type="Node" parent="StateMachine"]
+script = ExtResource("4_xjita")

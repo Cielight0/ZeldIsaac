@@ -1,9 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://cc863vhdgryxk"]
+[gd_scene load_steps=33 format=3 uid="uid://cc863vhdgryxk"]
 
 [ext_resource type="Texture2D" uid="uid://cqsa1dfa3jt0c" path="res://Scenes/InteractiveObjects/Coin/PetitePiece_SpriteSheet.png" id="1_i88gh"]
 [ext_resource type="Script" path="res://Scenes/InteractiveObjects/Coin/coin.gd" id="1_y64al"]
 [ext_resource type="Texture2D" uid="uid://3mk8sjrkamtb" path="res://Scenes/InteractiveObjects/Coin/PetitePieceShadow_SpriteSheet.png" id="2_v7u0g"]
 [ext_resource type="AudioStream" uid="uid://cw64yhrdwnee6" path="res://assets/Validation.ogg" id="4_7o6kq"]
+[ext_resource type="Script" path="res://StateMachine/StateMachine.gd" id="5_d5k8g"]
+[ext_resource type="Script" path="res://StateMachine/state.gd" id="6_2mrsi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asq4n"]
 atlas = ExtResource("2_v7u0g")
@@ -260,9 +262,22 @@ wait_time = 0.35
 one_shot = true
 autostart = true
 
-[connection signal="state_changed" from="." to="." method="_on_state_changed"]
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_d5k8g")
+
+[node name="Spawn" type="Node" parent="StateMachine"]
+script = ExtResource("6_2mrsi")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("6_2mrsi")
+
+[node name="Follow" type="Node" parent="StateMachine"]
+script = ExtResource("6_2mrsi")
+
+[node name="Collect" type="Node" parent="StateMachine"]
+script = ExtResource("6_2mrsi")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="SpawnDurationTimer" to="." method="_on_spawn_duration_timer_timeout"]
