@@ -1,7 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy0slsvbgpw6u"]
+[gd_scene load_steps=5 format=3 uid="uid://dy0slsvbgpw6u"]
 
 [ext_resource type="PackedScene" uid="uid://beldfg84pufbi" path="res://Scenes/Actors/Actor.tscn" id="1_dvmqw"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/Enemy.gd" id="2_5oxif"]
+[ext_resource type="Script" path="res://StateMachine/StateMachine.gd" id="3_qwmnp"]
+[ext_resource type="Script" path="res://StateMachine/state.gd" id="4_as6bh"]
 
 [node name="Enemy" instance=ExtResource("1_dvmqw")]
 script = ExtResource("2_5oxif")
+
+[node name="ChaseArea" type="Area2D" parent="." index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea" index="0"]
+
+[node name="AttackArea" type="Area2D" parent="." index="6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0"]
+
+[node name="BehaviourTree" type="Node2D" parent="." index="7"]
+script = ExtResource("3_qwmnp")
+
+[node name="Wander" type="Node" parent="BehaviourTree" index="0"]
+script = ExtResource("4_as6bh")
+
+[node name="Chase" type="Node" parent="BehaviourTree" index="1"]
+script = ExtResource("4_as6bh")
+
+[node name="Attack" type="Node" parent="BehaviourTree" index="2"]
+script = ExtResource("4_as6bh")

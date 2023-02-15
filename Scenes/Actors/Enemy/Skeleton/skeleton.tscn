@@ -1,13 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn0psv3ohug7g"]
+[gd_scene load_steps=12 format=3 uid="uid://dn0psv3ohug7g"]
 
 [ext_resource type="PackedScene" uid="uid://dy0slsvbgpw6u" path="res://Scenes/Actors/Enemy/enemy.tscn" id="1_bvvee"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/skeleton.gd" id="2_jf4i4"]
 [ext_resource type="SpriteFrames" uid="uid://rraednx6ydu4" path="res://Scenes/Actors/Enemy/Skeleton/skeletonSpriteFrame.tres" id="3_x8oox"]
 [ext_resource type="AudioStream" uid="uid://b2goreecfk6lk" path="res://assets/whoosh.ogg" id="4_giogj"]
+[ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/EnemyMoveState.gd" id="5_31yxd"]
+[ext_resource type="Script" path="res://StateMachine/Statelabel.gd" id="5_pmkc4"]
+[ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/ChaseState.gd" id="5_wnior"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2k0k"]
+radius = 11.0
+height = 38.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtgaq"]
+size = Vector2(32, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlars"]
+radius = 172.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxyd5"]
+radius = 28.0179
 
 [node name="Skeleton" instance=ExtResource("1_bvvee")]
 script = ExtResource("2_jf4i4")
@@ -17,10 +29,37 @@ sprite_frames = ExtResource("3_x8oox")
 animation = &"AttackDown"
 
 [node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_r2k0k")
 
 [node name="CollisionShape2D" parent="AttackHitbox" index="0"]
+position = Vector2(-1, 22)
 shape = SubResource("RectangleShape2D_xtgaq")
 
 [node name="AudioStreamPlayer2D" parent="." index="3"]
 stream = ExtResource("4_giogj")
+
+[node name="Move" parent="StateMachine" index="2"]
+script = ExtResource("5_31yxd")
+
+[node name="CollisionShape2D" parent="ChaseArea" index="0"]
+shape = SubResource("CircleShape2D_vlars")
+one_way_collision_margin = 69.0
+metadata/_edit_lock_ = true
+
+[node name="AttackArea" parent="." index="6"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="AttackArea" index="0"]
+shape = SubResource("CircleShape2D_gxyd5")
+one_way_collision_margin = 13.7
+
+[node name="Chase" parent="BehaviourTree" index="1"]
+script = ExtResource("5_wnior")
+
+[node name="Label" type="Label" parent="BehaviourTree" index="3"]
+offset_left = -21.0
+offset_top = -40.0
+offset_right = 24.0
+offset_bottom = -17.0
+script = ExtResource("5_pmkc4")

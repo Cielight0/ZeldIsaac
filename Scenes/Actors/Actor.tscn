@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://beldfg84pufbi"]
+[gd_scene load_steps=6 format=3 uid="uid://beldfg84pufbi"]
 
 [ext_resource type="Script" path="res://Scenes/Actors/Actors.gd" id="1_jfi5a"]
 [ext_resource type="Script" path="res://StateMachine/StateMachine.gd" id="2_urupo"]
 [ext_resource type="Script" path="res://StateMachine/state.gd" id="3_rlslf"]
+[ext_resource type="Script" path="res://StateMachine/Statelabel.gd" id="4_ob0e0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bv6ks"]
 animations = [{
@@ -89,7 +90,7 @@ debug_color = Color(0.407843, 0.462745, 1, 0.419608)
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -4.0
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("2_urupo")
 
 [node name="Idle" type="Node" parent="StateMachine"]
@@ -100,3 +101,8 @@ script = ExtResource("3_rlslf")
 
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource("3_rlslf")
+
+[node name="Label" type="Label" parent="StateMachine"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("4_ob0e0")

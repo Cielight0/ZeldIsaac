@@ -376,5 +376,5 @@ volume_db = -20.019
 [node name="Character" parent="." instance=ExtResource("13_vhkv7")]
 position = Vector2(537, 317)
 
-[node name="SkeletonNew" parent="." instance=ExtResource("13_n7et7")]
-position = Vector2(486, 353)
+[node name="Skeleton" parent="." instance=ExtResource("13_n7et7")]
+position = Vector2(705, 226)
