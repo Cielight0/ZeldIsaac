@@ -7,6 +7,7 @@ extends Node2D
 @onready var shadowsprite = $ShadowSprite
 @onready var animation_player = $AnimationPlayer
 @onready var timer = $Timer
+@onready var SpawnDuration = $SpawnDurationTimer
 @onready var state_machine = $StateMachine
 
 signal state_changed
@@ -24,8 +25,13 @@ var damping := 20
 
 
 func _ready()-> void:
+	area.body_entered.connect(_on_area_2d_body_entered)
 	state_machine.state_changed.connect(_on_state_changed)
 	audiostream.finished.connect(_on_audio_stream_player_2d_finished)
+	SpawnDuration.timeout.connect(_on_spawn_duration_timer_timeout)
+	timer.timeout.connect(_on_timer_timeout)
+	
+	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
 	
 	particules.set_emitting(false)
 	animation_player.play("wave")

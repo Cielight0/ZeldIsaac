@@ -276,8 +276,3 @@ script = ExtResource("6_2mrsi")
 
 [node name="Collect" type="Node" parent="StateMachine"]
 script = ExtResource("6_2mrsi")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="SpawnDurationTimer" to="." method="_on_spawn_duration_timer_timeout"]
