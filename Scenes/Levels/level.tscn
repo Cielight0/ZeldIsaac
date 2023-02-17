@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bku6c17xckros"]
+[gd_scene load_steps=15 format=3 uid="uid://bku6c17xckros"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/level.gd" id="1_f5n83"]
 [ext_resource type="Texture2D" uid="uid://cwxyphq8na3to" path="res://assets/Tileset.png" id="2_liy7y"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://Scenes/UI/HUD/HUD.gd" id="8_0wusw"]
 [ext_resource type="FontFile" uid="uid://cn5fuf0okhhdn" path="res://Scenes/UI/Font/BabaMediumPixels.ttf" id="9_5t7ei"]
 [ext_resource type="Script" path="res://Scenes/Levels/CoinFactory.gd" id="11_i82lj"]
-[ext_resource type="AudioStream" uid="uid://cu75duys73myx" path="res://assets/Music/05 - DavidKBD - Belmont Chronicles Pack - Abandoned Church.ogg" id="12_t5wka"]
 [ext_resource type="PackedScene" uid="uid://dn0psv3ohug7g" path="res://Scenes/Actors/Enemy/Skeleton/Skeleton.tscn" id="13_n7et7"]
 [ext_resource type="PackedScene" uid="uid://boxqmg07xhpgo" path="res://Scenes/Actors/Characters/character.tscn" id="13_vhkv7"]
 
@@ -370,11 +369,12 @@ position = Vector2(840, 177)
 
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(671, 283)
-stream = ExtResource("12_t5wka")
 volume_db = -20.019
 
 [node name="Character" parent="." instance=ExtResource("13_vhkv7")]
 position = Vector2(537, 317)
+facing_direction = null
+moving_direction = null
 
 [node name="Skeleton" parent="." instance=ExtResource("13_n7et7")]
 position = Vector2(705, 226)

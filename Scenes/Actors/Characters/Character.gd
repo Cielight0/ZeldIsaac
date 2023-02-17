@@ -2,6 +2,8 @@ extends Actor
 class_name Character
 @onready var input := Vector2.ZERO
 
+
+
 ### INPUTS ###
 func get_input():
 

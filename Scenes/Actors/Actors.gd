@@ -9,6 +9,8 @@ class_name Actor
 @onready var attack_hitbox = $AttackHitbox
 @onready var audiostream = $AudioStreamPlayer2D
 
+var moving_direction := Vector2.ZERO : set = set_moving_direction, get = get_moving_direction
+var facing_direction := Vector2.DOWN : set = set_facing_direction, get = get_facing_direction
 
 var dir_dict : Dictionary = {
 	"Left": Vector2.LEFT,
@@ -22,19 +24,19 @@ signal facing_direction_changed
 signal moving_direction_changed
 
 ### ACCESSORS###
-@export var facing_direction := Vector2.DOWN:
-	set(value):
-		if value !=facing_direction:
-			facing_direction = value
-			emit_signal("facing_direction_changed")
-	get:
-		return facing_direction
+func set_facing_direction(value: Vector2) -> void:
+	if facing_direction != value:
+		facing_direction = value
+		emit_signal("facing_direction_changed")
+func get_facing_direction() -> Vector2:
+	return facing_direction
 
-@export var moving_direction := Vector2.DOWN:
-	set(value):
-		if value !=moving_direction:
-			moving_direction = value
-			emit_signal("moving_direction_changed")
+func set_moving_direction(value: Vector2) -> void:
+	if value != moving_direction:
+		moving_direction = value
+		emit_signal("moving_direction_changed")
+func get_moving_direction() -> Vector2:
+	return moving_direction
 
 ### Connections ###
 func _ready() -> void:
@@ -74,6 +76,7 @@ func update_animation():
 	
 	if state_name != "":
 		animated_sprite.play(state_name+dir_name)
+		print(state_name+dir_name)
 
 ### SIGNAL RESPONSES###
 

@@ -10,6 +10,8 @@
 
 [node name="Character" instance=ExtResource("1_s7o4m")]
 script = ExtResource("2_rgbi2")
+facing_direction = null
+moving_direction = null
 
 [node name="AnimatedPlayer" parent="." index="0"]
 sprite_frames = ExtResource("3_6wu55")
