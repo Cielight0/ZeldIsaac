@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dn0psv3ohug7g"]
+[gd_scene load_steps=17 format=3 uid="uid://dn0psv3ohug7g"]
 
 [ext_resource type="PackedScene" uid="uid://dy0slsvbgpw6u" path="res://Scenes/Actors/Enemy/enemy.tscn" id="1_bvvee"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/skeleton.gd" id="2_jf4i4"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/AttackState.gd" id="5_slo4g"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/Skeleton/ChaseState.gd" id="5_wnior"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/BehaviourTree/WanderChase.gd" id="7_l8qhu"]
+[ext_resource type="Script" path="res://Scenes/Actors/Enemy/BehaviourTree/WaitState.gd" id="8_wt6kp"]
 [ext_resource type="Script" path="res://Scenes/Actors/Enemy/BehaviourTree/AttackState.gd" id="9_p71rl"]
+[ext_resource type="Script" path="res://Scenes/Actors/Enemy/BehaviourTree/GoToState.gd" id="9_ud1dj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2k0k"]
 radius = 11.0
@@ -26,7 +28,7 @@ radius = 23.5372
 
 [node name="Skeleton" instance=ExtResource("1_bvvee")]
 script = ExtResource("2_jf4i4")
-speed = 175
+speed = 100
 
 [node name="AnimatedPlayer" parent="." index="0"]
 sprite_frames = ExtResource("3_x8oox")
@@ -64,11 +66,23 @@ one_way_collision_margin = 13.7
 [node name="Wander" parent="BehaviourTree" index="0"]
 script = ExtResource("7_l8qhu")
 
+[node name="Wait" type="Node" parent="BehaviourTree/Wander" index="0"]
+script = ExtResource("8_wt6kp")
+
+[node name="Timer" type="Timer" parent="BehaviourTree/Wander/Wait" index="0"]
+one_shot = true
+
+[node name="GoTo" type="Node" parent="BehaviourTree/Wander" index="1"]
+script = ExtResource("9_ud1dj")
+
 [node name="Chase" parent="BehaviourTree" index="1"]
 script = ExtResource("5_wnior")
 
 [node name="Attack" parent="BehaviourTree" index="2"]
 script = ExtResource("9_p71rl")
+
+[node name="Cooldown" type="Timer" parent="BehaviourTree/Attack" index="0"]
+one_shot = true
 
 [node name="Label" type="Label" parent="BehaviourTree" index="3"]
 offset_left = -21.0

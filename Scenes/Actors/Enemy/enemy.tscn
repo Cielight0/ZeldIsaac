@@ -7,8 +7,6 @@
 
 [node name="Enemy" instance=ExtResource("1_dvmqw")]
 script = ExtResource("2_5oxif")
-facing_direction = null
-moving_direction = null
 
 [node name="ChaseArea" type="Area2D" parent="." index="5"]
 

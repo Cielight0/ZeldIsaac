@@ -39,11 +39,11 @@ func _ready():
 	attack_area.body_exited.connect(_on_AttackArea_body_exited)
 	target_in_chase_area_changed.connect(_on_ChaseArea_body_changed)
 	target_in_attack_area_changed.connect(_on_AttackArea_body_changed)
+	statemachine.state_changed.connect(_on_state_machine_state_changed)
 
 ###LOGIC###
 func move_along_path(delta: float)->void:
 	if path.is_empty():
-		print("path empty")
 		return
 		
 	var dir = global_position.direction_to(path[0])
@@ -54,10 +54,8 @@ func move_along_path(delta: float)->void:
 	if dist <= speed * delta:
 		var __= move_and_collide(dir*dist)
 		path.remove_at(0)
-		print(path)
 	else:
 		var __= move_and_collide(dir*speed*delta)
-		print(path)
 
 func _update_move_path(dest: Vector2)->void:
 	path=[dest]
@@ -67,13 +65,16 @@ func _update_target()->void:
 		target = null
 
 func _update_behaviour_state()->void:
-	if target_in_attack_area:
+	if can_attack():
 		behaviour_tree.set_state("Attack")
 	elif target_in_chase_area:
 		behaviour_tree.set_state("Chase")
 	else:
 		behaviour_tree.set_state("Wander")
 
+func can_attack()->bool:
+	return !$BehaviourTree/Attack.is_cooldown_runing() && target_in_attack_area
+	
 ###SIGNAL RESPONSES###
 func _on_ChaseArea_body_entered(body: Node2D)->void:
 	if body is Character:
@@ -98,7 +99,6 @@ func _on_ChaseArea_body_changed(_value: bool)->void:
 	_update_target()
 	_update_behaviour_state()
 
-	
 func _on_AttackArea_body_changed(_value: bool)->void:
 	_update_target()
 
@@ -110,3 +110,12 @@ func _on_moving_direction_changed():
 		facing_direction = (Vector2(sign(moving_direction).x,0))
 	else:
 		facing_direction = (Vector2(0,sign(moving_direction).y))
+
+
+func _on_state_machine_state_changed(state):
+	if statemachine == null:
+		return
+	if state.name =="Idle" && statemachine.previous_state == $StateMachine/Attack:
+		_update_behaviour_state()
+		print("test !!!")
+		

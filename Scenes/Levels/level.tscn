@@ -373,8 +373,6 @@ volume_db = -20.019
 
 [node name="Character" parent="." instance=ExtResource("13_vhkv7")]
 position = Vector2(537, 317)
-facing_direction = null
-moving_direction = null
 
 [node name="Skeleton" parent="." instance=ExtResource("13_n7et7")]
 position = Vector2(705, 226)

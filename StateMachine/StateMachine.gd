@@ -1,4 +1,4 @@
-extends Node
+extends State
 class_name StateMachine
 
 var current_state : Node = null : set = set_state, get = get_state
@@ -21,7 +21,8 @@ func set_state(state)->void:
 	previous_state = current_state
 	current_state = state
 	
-	state.enter_state()
+	if current_state != null:
+		current_state.enter_state()
 	
 	emit_signal("state_changed", current_state)
 
@@ -36,7 +37,18 @@ func get_previous_state()->Node : return previous_state
 ##built-in###
 
 func _ready()->void:
-	set_state(get_child(0))
+	set_to_default_state()
 
 func _physics_process(delta:float)->void:
 		current_state.update(delta)
+
+###virtual###
+func enter_state()->void:
+	set_to_default_state()
+	
+func exist_state()->void:
+	set_state(null)
+	
+###logic###
+func set_to_default_state()->void:
+	set_state(get_child(0))
