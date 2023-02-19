@@ -38,7 +38,7 @@ func _ready()-> void:
 	_init_spawn_values()
 
 func _init_spawn_values()-> void:
-	var rdm_angle = randf_range(0, 360)
+	var rdm_angle = deg_to_rad(randf_range(0, 360))
 	spawn_dir = Vector2(sin(rdm_angle),cos(rdm_angle))
 	
 

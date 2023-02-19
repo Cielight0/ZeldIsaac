@@ -76,7 +76,6 @@ func update_animation():
 	
 	if state_name != "":
 		animated_sprite.play(state_name+dir_name)
-		print(state_name+dir_name)
 
 ### SIGNAL RESPONSES###
 

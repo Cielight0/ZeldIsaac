@@ -9,6 +9,7 @@ func enter_state() -> void:
 	cooldown.start()
 	
 func is_cooldown_runing()->bool:
+	print("is on cooldown")
 	return !cooldown.is_stopped() && !cooldown.is_paused()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

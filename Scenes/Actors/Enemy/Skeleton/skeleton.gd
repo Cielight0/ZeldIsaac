@@ -17,6 +17,7 @@ var target_in_attack_area : bool = false : set = set_target_in_attack_area
 
 signal target_in_chase_area_changed
 signal target_in_attack_area_changed
+signal move_path_finished
 
 ###ACCESSOR###
 func set_target_in_chase_area(value:bool)->void:
@@ -54,6 +55,9 @@ func move_along_path(delta: float)->void:
 	if dist <= speed * delta:
 		var __= move_and_collide(dir*dist)
 		path.remove_at(0)
+		
+		if path.is_empty():
+			emit_signal("move_path_finished")
 	else:
 		var __= move_and_collide(dir*speed*delta)
 
